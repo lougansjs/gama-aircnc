@@ -1,0 +1,22 @@
+.card {
+  border-radius: 0 !important;
+  background-color: black !important;
+  border: 0 !important;
+}
+
+.card-title, .card-text {
+  color: white !important;
+}
+
+.card .card-img-top {
+  border: 0 !important;
+}
+
+.card-body {
+  height: 150px !important;
+}
+
+.badge {
+  padding: .60em .8em !important;
+  border-radius: 0 !important;
+}
