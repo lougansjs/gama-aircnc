@@ -20,3 +20,13 @@
   padding: .60em .8em !important;
   border-radius: 0 !important;
 }
+
+.badge-room {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.badge-farm {
+  background-color: chocolate;
+  color: white;
+}

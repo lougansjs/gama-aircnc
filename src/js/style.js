@@ -7,3 +7,7 @@
 //     // })
 //   }
 // }
+
+// [1,2,3,4,5,6].sort(function() {
+//   return .5 - Math.random();
+// });
