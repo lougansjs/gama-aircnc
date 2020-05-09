@@ -1,11 +1,13 @@
 var cards = document.querySelector("#row")
 var url = "https://api.sheety.co/30b6e400-9023-4a15-8e6c-16aa4e3b1e72"
 
+// [Formatação] Aplica o formato de texto capitalize para o título do card
 function toCapitalize(text) {
   var text = text.toLowerCase()
   return text.charAt(0).toUpperCase() + text.slice(1)
 }
 
+// [Performance] Altera a URL da imagem para pegar uma imagem com tamanho menor
 function replaceSizeImage(img) { 
   $p1 = '=x_large'
   $p2 = '=xx_large'
@@ -19,10 +21,12 @@ function replaceSizeImage(img) {
   return image
 }
 
+// [Formatação] Aplica mascara de moeda no preço.
 function formatCurrency(price) {
   return `<h4 class="card-text card-price">${price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h4>`
 }
 
+// [Estilo] Retorna o nome da classe a ser usado na tag de categoria do imóvel
 function stylePropertyType(type) {
   var props = ''
   switch (type) {
@@ -53,6 +57,7 @@ function stylePropertyType(type) {
   return props
 }
 
+// [Main] Construtor
 function requestApi(uri, selector) { 
   fetch(uri).then(response => response.json())
     .then(data => {
