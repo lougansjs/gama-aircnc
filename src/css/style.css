@@ -1,5 +1,6 @@
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
 
+body { scroll-behavior: smooth !important; }
 .bg-black { background-color: black; }
 
 .navbar { padding: 1rem 2rem !important; }
@@ -51,6 +52,11 @@
   padding: 10px;
   border-radius: 12px;
   border: 1px solid #dedcdc
+}
+
+.btn-github-star {
+  background-color: #38b6b5 !important;
+  color: black !important;
 }
 
 .btn-search {
