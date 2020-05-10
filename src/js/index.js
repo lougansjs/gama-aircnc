@@ -145,8 +145,3 @@ document.getElementById("form-search").onsubmit = (e) => {
   var search = `?city=${location}&guests=${guests}`
   requestApi(url, selectors, search)
 }
-
-var deferredPrompt;
-window.addEventListener('beforeinstallprompt', function (e) { 
-  deferredPrompt = e; showAddToHomeScreen();
-});

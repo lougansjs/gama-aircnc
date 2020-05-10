@@ -3,10 +3,8 @@
   "short_name": "Gama Aircnc",
   "theme_color": "#000000",
   "background_color": "#000000",
-  "display": "minimal-ui",
+  "display": "fullscreen",
   "orientation": "portrait",
-  "Scope": "/",
-  "start_url": "/",
   "icons": [
     {
       "src": "./src/assets/img/webapp/icon-72x72.png",
@@ -49,5 +47,6 @@
       "type": "image/png"
     }
   ],
-  "splash_pages": null
+  "splash_pages": null,
+  "start_url": "/"
 }
