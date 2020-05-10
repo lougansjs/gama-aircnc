@@ -1,5 +1,5 @@
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('src/js/sw.js', { scope: '/' }).then(function(reg) {
+  navigator.serviceWorker.register('sw.js', { scope: '/' }).then(function(reg) {
       console.log('[Companion]', 'Service worker foi registrado!');
       console.log(reg);
   });
