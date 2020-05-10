@@ -137,14 +137,11 @@ function requestApi(uri, selectors, search = null) {
   }
 }
 
-window.onload = () => {
-  requestApi(url, selectors)
-  document.getElementById("form-search").onsubmit = (e) => {
-    e.preventDefault()
-    var location = document.querySelector("#location").value
-    var guests = document.querySelector("#guests").value
-    var search = `?city=${location}&guests=${guests}`
-    requestApi(url, selectors, search)
-  }
+requestApi(url, selectors)
+document.getElementById("form-search").onsubmit = (e) => {
+  e.preventDefault()
+  var location = document.querySelector("#location").value
+  var guests = document.querySelector("#guests").value
+  var search = `?city=${location}&guests=${guests}`
+  requestApi(url, selectors, search)
 }
-

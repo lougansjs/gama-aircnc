@@ -1,16 +1,4 @@
-if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('./src/js/sw.js').then(function(reg) {
-      console.log('[Companion]', 'Service worker foi registrado!');
-  });
+/* Only register a service worker if it's supported */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./src/js/sw.js');
 }
-
-window.addEventListener('beforeinstallprompt', function(e) {
-  e.userChoice.then(function(choiceResult) {
-    console.log(choiceResult.outcome);
-    if (choiceResult.outcome == 'dismissed') {
-      console.log('Evento cancelado');
-    } else {
-      console.log('Adicionar Aircnc App na Tela Inicial');
-    }
-  });
-});
