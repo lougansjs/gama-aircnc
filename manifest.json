@@ -1,9 +1,9 @@
 {
   "name": "Gama Aircnc",
-  "short_name": "GamaAircnc",
+  "short_name": "Gama Aircnc",
   "theme_color": "#000000",
   "background_color": "#000000",
-  "display": "standalone",
+  "display": "minimal-ui",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",
