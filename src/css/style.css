@@ -6,6 +6,18 @@
 
 .nav-item .nav-link { font-size: 14px; }
 
+.f24px {
+  font-size: 24px;
+}
+
+.bg-black-alt {
+  background-color: #000000e6;
+}
+
+.c-white {
+  color: white;
+}
+
 .expansive {
   max-width: 1600px;
   width: 100%;
@@ -53,8 +65,12 @@
   color: #38b6b5 !important;
 }
 
-.card-price {
+.card-price, .c-cyan {
   color: #38b6b5 !important;
+}
+
+.border-left-cyan {
+  border-left: 1px solid cyan;
 }
 
 .mt-34px {
@@ -64,4 +80,14 @@
 .price-details {
   font-size: 14px;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .footer-info, .footer-logos, .footer-info .row {
+    text-align: center !important;
+  }
+
+  .footer-logos {
+    margin-top: 22px;
+  }
 }

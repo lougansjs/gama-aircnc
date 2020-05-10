@@ -1,7 +1,7 @@
 // var cards = document.querySelector("#row")
 // var inputLocation = document.querySelector("#location")
 var selectors = {
-  "cards": document.querySelector("#row"),
+  "cards": document.querySelector("#cards"),
   "location": document.querySelector("#location")
 }
 var url = "https://v2-api.sheety.co/3bb02cf28ab345eeb441509a07265ebe/apiAircnc/rooms"
@@ -106,7 +106,7 @@ function buildCards(selector, rooms) {
     const style_props = stylePropertyType(property_type)
     
     selector.innerHTML += `
-      <div class="col-sm-6 col-md-4 col-xl-3 mt-5">
+      <div class="col-sm-6 col-md-4 col-xl-3 mt-4">
         <div class="card">
           <img class="card-img-top" height="246" src="${image}" alt="#">
           <div class="card-body">
