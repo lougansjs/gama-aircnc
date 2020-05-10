@@ -82,6 +82,14 @@
   color: white;
 }
 
+.c-white {
+  color: white;
+}
+
+a.c-white:hover {
+  color: #38b6b5;
+}
+
 @media (max-width: 768px) {
   .footer-info, .footer-logos, .footer-info .row {
     text-align: center !important;
@@ -89,5 +97,6 @@
 
   .footer-logos {
     margin-top: 22px;
+    border: none !important;
   }
 }

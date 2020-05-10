@@ -2,7 +2,8 @@
 // var inputLocation = document.querySelector("#location")
 var selectors = {
   "cards": document.querySelector("#cards"),
-  "location": document.querySelector("#location")
+  "location": document.querySelector("#location"),
+  "modal": document.querySelector("#modal")
 }
 var url = "https://v2-api.sheety.co/3bb02cf28ab345eeb441509a07265ebe/apiAircnc/rooms"
 
@@ -67,17 +68,6 @@ function stylePropertyType(type) {
   return props
 }
 
-// [Main] Construtor
-function requestApi(uri, selectors) { 
-  fetch(uri).then(response => response.json())
-    .then(data => {
-        const rooms = data.rooms
-        const city = filterCities(rooms)
-        buildCards(selectors.cards, rooms)
-        buildOptionsLocation(selectors.location, city)
-    })
-}
-
 // [Filtro] Filtra as cidades da API e remove dados duplicados
 function filterCities(rooms) {
   const city = rooms.map((room) => room.city)
@@ -96,15 +86,15 @@ function buildOptionsLocation(selector, city) {
 
 // [Submain] Constroi os cards
 function buildCards(selector, rooms) {
+  selector.innerHTML = ''
+  for(let i = 0; i < rooms.length; i++){
 
-  for(let i =0; i < 24; i++){
-
-    const image = replaceSizeImage(rooms[i].photo)
-    const name  = toCapitalize(rooms[i].name)
-    const price = formatCurrency(rooms[i].price)
+    const id            = rooms[i].id
+    const image         = replaceSizeImage(rooms[i].photo)
+    const name          = toCapitalize(rooms[i].name)
+    const price         = formatCurrency(rooms[i].price)
     const property_type = rooms[i].propertyType
-    const style_props = stylePropertyType(property_type)
-    
+    const style_props   = stylePropertyType(property_type)
     selector.innerHTML += `
       <div class="col-sm-6 col-md-4 col-xl-3 mt-4">
         <div class="card">
@@ -116,8 +106,11 @@ function buildCards(selector, rooms) {
               ${price}
             </div>
           </div>
-          <div class="card-footer text-muted">
-            2 dias atrás
+          <div class="card-footer c-white">
+            <i class="fa fa-plus pr-1"></i>
+            <a id="link-details" href class="c-white text-decoration-none" data-card-id="${id}" data-toggle="modal" data-target="#modal_response">
+              Mais detalhes
+            </a>
           </div>
         </div>
       </div>
@@ -125,5 +118,33 @@ function buildCards(selector, rooms) {
   }
 }
 
-requestApi(url, selectors)
+// [Main] Construtor
+function requestApi(uri, selectors, search = null) {
+  if (search === null) {
+    fetch(uri).then(response => response.json())
+      .then(data => {
+          const rooms = data.rooms
+          const city = filterCities(rooms)
+          buildCards(selectors.cards, rooms)
+          buildOptionsLocation(selectors.location, city)
+      })
+  } else {
+    fetch(uri + search).then(response => response.json())
+    .then(data => {
+        const rooms = data.rooms
+        buildCards(selectors.cards, rooms)
+    })
+  }
+}
+
+window.onload = () => {
+  requestApi(url, selectors)
+  document.getElementById("form-search").onsubmit = (e) => {
+    e.preventDefault()
+    var location = document.querySelector("#location").value
+    var guests = document.querySelector("#guests").value
+    var search = `?city=${location}&guests=${guests}`
+    requestApi(url, selectors, search)
+  }
+}
 
