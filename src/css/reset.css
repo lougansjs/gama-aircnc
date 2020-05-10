@@ -30,3 +30,18 @@
   background-color: chocolate;
   color: white;
 }
+
+.box-search select {
+  height: 32px;
+  border: 1px solid black;
+  border-radius: 0;
+}
+
+.form-text {
+  margin-bottom: .50rem;
+}
+
+.form-control:focus {
+  border-color: black !important;
+  box-shadow: none !important;
+}
