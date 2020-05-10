@@ -1,5 +1,10 @@
-var cards = document.querySelector("#row")
-var url = "https://api.sheety.co/30b6e400-9023-4a15-8e6c-16aa4e3b1e72"
+// var cards = document.querySelector("#row")
+// var inputLocation = document.querySelector("#location")
+var selectors = {
+  "cards": document.querySelector("#row"),
+  "location": document.querySelector("#location")
+}
+var url = "https://v2-api.sheety.co/3bb02cf28ab345eeb441509a07265ebe/apiAircnc/rooms"
 
 // [Formatação] Aplica o formato de texto capitalize para o título do card
 function toCapitalize(text) {
@@ -23,7 +28,12 @@ function replaceSizeImage(img) {
 
 // [Formatação] Aplica mascara de moeda no preço.
 function formatCurrency(price) {
-  return `<h4 class="card-text card-price">${price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h4>`
+  return `
+    <h4 class="card-text card-price">
+      ${ new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price)}
+      <span class="price-details" >| POR DIA</span>
+    </h4>
+  `
 }
 
 // [Estilo] Retorna o nome da classe a ser usado na tag de categoria do imóvel
@@ -58,37 +68,62 @@ function stylePropertyType(type) {
 }
 
 // [Main] Construtor
-function requestApi(uri, selector) { 
+function requestApi(uri, selectors) { 
   fetch(uri).then(response => response.json())
     .then(data => {
-        for(let i =0; i <24;i++){
-
-          var image = replaceSizeImage(data[i].photo)
-          var name  = toCapitalize(data[i].name)
-          var price = formatCurrency(data[i].price)
-          var property_type = data[i].property_type
-          var style_props = stylePropertyType(property_type)
-
-          selector.innerHTML += `
-            <div class="col-sm-6 col-md-4 col-xl-3 mt-5">
-              <div class="card">
-                <img class="card-img-top" height="246" src="${image}" alt="#">
-                <div class="card-body">
-                  <h6 class="card-title">${name}</h6>
-                  <span class="badge ${style_props}">${property_type}</span>
-                  <div class="mt-34px">
-                    ${price}
-                  </div>
-                </div>
-                <div class="card-footer text-muted">
-                  2 dias atrás
-                </div>
-              </div>
-            </div>
-          `;
-        }  
+        const rooms = data.rooms
+        const city = filterCities(rooms)
+        buildCards(selectors.cards, rooms)
+        buildOptionsLocation(selectors.location, city)
     })
 }
 
-requestApi(url, cards)
+// [Filtro] Filtra as cidades da API e remove dados duplicados
+function filterCities(rooms) {
+  const city = rooms.map((room) => room.city)
+  const options = city.filter((here, i) => city.indexOf(here) === i)
+  return options
+}
+
+// [Submain] Constroi os options de localização
+function buildOptionsLocation(selector, city) {
+  for(var i = 0; i < city.length; i++) {
+    selector.innerHTML += `
+      <option>${city[i]}</option>
+    `
+  }
+}
+
+// [Submain] Constroi os cards
+function buildCards(selector, rooms) {
+
+  for(let i =0; i < 24; i++){
+
+    const image = replaceSizeImage(rooms[i].photo)
+    const name  = toCapitalize(rooms[i].name)
+    const price = formatCurrency(rooms[i].price)
+    const property_type = rooms[i].propertyType
+    const style_props = stylePropertyType(property_type)
+    
+    selector.innerHTML += `
+      <div class="col-sm-6 col-md-4 col-xl-3 mt-5">
+        <div class="card">
+          <img class="card-img-top" height="246" src="${image}" alt="#">
+          <div class="card-body">
+            <h6 class="card-title">${name}</h6>
+            <span class="badge ${style_props}">${property_type}</span>
+            <div class="mt-34px">
+              ${price}
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            2 dias atrás
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+requestApi(url, selectors)
 
